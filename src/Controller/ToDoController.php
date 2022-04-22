@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-// l'exercice TODO list avec ajout d'une fonction UPDATE 
+ 
 
 class ToDoController extends AbstractController
 {
