@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+#[Route ('/todo')]
 class ToDoController extends AbstractController
 {
-    #[Route('/todo', name: 'todo')]
+    #[Route('/', name: 'todo')]
     public function index(Request $request): Response
     {
         $session = $request->getSession();
@@ -25,8 +26,8 @@ class ToDoController extends AbstractController
         return $this->render('to_do/index.html.twig');
     }
 
-     #[Route('/todo/add/{name}/{content}', name: 'to_do.add')]
-    public  function  addToDo(Request $request, $name,$content ){
+     #[Route('/add/{name}/{content}', name: 'to_do.add')]
+    public  function  addToDo(Request $request, $name,$content ):RedirectResponse{
          $session = $request->getSession();
         //verify the existence of todo in session
          if ($session->has('todo')) {
@@ -54,8 +55,8 @@ class ToDoController extends AbstractController
       return $this->redirectToRoute('todo');
      }
 
-    #[Route('/todo/remove/{name}', name: 'to_do.remove')]
-    public  function  removeToDo(Request $request,$name){
+    #[Route('/remove/{name}', name: 'to_do.remove')]
+    public  function  removeToDo(Request $request,$name):RedirectResponse{
         $session = $request->getSession();
         //verify the existence of todo in session
         if ($session->has('todo')) {
@@ -83,8 +84,8 @@ class ToDoController extends AbstractController
         return $this->redirectToRoute('todo');
     }
 
-    #[Route('/todo/reset', name: 'to_do.reset')]
-    public  function  resetToDo(Request $request ){
+    #[Route('/reset', name: 'to_do.reset')]
+    public  function  resetToDo(Request $request ):RedirectResponse{
         $session = $request->getSession();
         //verify the existence of todo in session
         if ($session->has('todo')) {
@@ -102,8 +103,8 @@ class ToDoController extends AbstractController
         return $this->redirectToRoute('todo');
     }
 
-    #[Route('/todo/update/{name}/{content}', name: 'to_do.update')]
-    public  function  updateToDo(Request $request, $name, $content ){
+    #[Route('/update/{name}/{content}', name: 'to_do.update')]
+    public  function  updateToDo(Request $request, $name, $content ):RedirectResponse{
         $session = $request->getSession();
         //verify the existence of todo in session
         if ($session->has('todo')) {
