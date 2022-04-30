@@ -16,4 +16,19 @@ class FirstController extends AbstractController
             'age' => '20'
         ]);
     }
+     #[Route('/first/tab/users', name: 'colored_tab')]
+public function tab(): Response{
+
+        $tab=[
+            ['firstname'=> 'ahmed', 'age'=> '19'],
+            ['firstname'=> 'mouna', 'age'=> '20']
+
+
+        ];
+        return $this->render('first/ColoredTab.html.twig',[
+            'tab'=>$tab
+        ]);
+     }
+
+
 }

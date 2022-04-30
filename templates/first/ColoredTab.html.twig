@@ -1,0 +1,20 @@
+{% extends 'heritage.html.twig' %}
+
+{% block body %}
+<table class="table">
+    <tr class="table-active">
+        <th>Firstname</th>
+        <th>Age</th>
+    </tr>
+    {% for element in tab %}
+
+    <tr class="table-{% if loop.index is even %}warning{% else %}danger{% endif %}">
+        <td>{{ element.firstname }}</td>
+        <td>{{ element.age }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}
+
+{% block title %} Colored Tab {% endblock %}
