@@ -1,0 +1,19 @@
+{% extends 'heritage.html.twig' %}
+
+{% block title %}Hello TabController!{% endblock %}
+
+{% block body %}
+<table class="table">
+    {% for element in tab %}
+    <tr> <td>{{ element }}</td> </tr>
+    {% endfor %}
+
+
+
+</table>
+    <div class="alert alert-info">
+        table length is {{ tab | length }} <br>
+        min is {{ min(tab) }} <br>
+        max is {{ max(tab) }}
+    </div>
+{% endblock %}
