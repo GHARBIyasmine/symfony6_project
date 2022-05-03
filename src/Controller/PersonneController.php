@@ -19,24 +19,33 @@ class PersonneController extends AbstractController
         $manager = $doctrine->getRepository(Personne::class);
         $personnes = $manager->findAll();
 
-        return $this->render('personne/index.html.twig', ['personnes' => $personnes]);
+        return $this->render('personne/index.html.twig', ['personnes' => $personnes, 'isPaginated' => false]);
     }
 
-    #[Route ('/{page<\d+>?1}/{nbr<\d+>?2}', name: 'personne.list.by')]
+    #[Route ('/all/{page<\d+>?1}/{nbr<\d+>?2}', name: 'personne.list.by')]
     public function find(ManagerRegistry $doctrine, $page, $nbr): Response
     {
         $manager = $doctrine->getRepository(Personne::class);
+        $nbPersonnes = $manager->count([]);
+        $nbpage = ceil($nbPersonnes / $nbr);
         $personnes = $manager->findby([], [], $nbr, (($page - 1) * $nbr));
 
-        return $this->render('personne/index.html.twig', ['personnes' => $personnes]);
+        return $this->render('personne/index.html.twig', [
+            'personnes' => $personnes,
+            'nbpages' => $nbpage,
+            'nbr' => $nbr,
+            'page' => $page,
+            'isPaginated' => true
+
+        ]);
     }
 
 
     #[Route ('/{id<\d+>}', name: 'personne.detail')]
     public function detail(ManagerRegistry $doctrine, $id, Personne $personne = null): Response
     {
-        $//        $manager = $doctrine->getRepository(Personne::class);
-        $//        $personne = $manager->find($id);
+        //        $manager = $doctrine->getRepository(Personne::class);
+        //        $personne = $manager->find($id);
 
         if (!$personne) {
 

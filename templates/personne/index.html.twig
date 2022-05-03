@@ -3,6 +3,26 @@
 {% block title %}Personne Index {% endblock %}
 
 {% block body %}
+    {% if isPaginated %}
+        <div class="row">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item {%  if page == 1 %} disabled {% endif %}">
+                    <a class="page-link" href="{{ path('personne.list.by',{page: page - 1 , nbr: nbr}) }}">Previous</a>
+                </li>
+                {% for i in range(1 , nbpages) %}
+                <li class="page-item {%  if page ==  i  %}active{% endif %}" >
+                    <a class="page-link" href="{{ path('personne.list.by',{page: i , nbr: nbr}) }}"> {{ i }} </a>
+                </li>
+                {% endfor %}
+                <li class="page-item {%  if page == nbpages %} disabled {% endif %}">
+                    <a class="page-link" href="{{ path('personne.list.by',{page: page + 1 , nbr: nbr}) }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+        <br>
+    {% endif %}
     <div class="row">
         {% for personne in personnes  %}
             <div class="card" style="width: 18rem;">
