@@ -19,7 +19,15 @@ class PersonneController extends AbstractController
         $manager = $doctrine->getRepository(Personne::class);
         $personnes = $manager->findAll();
 
-        return $this->render('personne/index.html.twig', ['personnes' => $personnes, 'isPaginated' => false]);
+        return $this->render('personne/index.html.twig', ['personnes' => $personnes, 'isPaginated'=>false]);
+    }
+    #[Route ('/all/age/{ageMin<\d+>?18}/{ageMax<\d+>?35}', name: 'personne.list.age')]
+    public function age(ManagerRegistry $doctrine, $ageMin, $ageMax): Response
+    {
+        $manager = $doctrine->getRepository(Personne::class);
+        $personnes = $manager->findByAge($ageMin,$ageMax);
+
+        return $this->render('personne/index.html.twig', ['personnes' => $personnes, 'isPaginated'=>false]);
     }
 
     #[Route ('/all/{page<\d+>?1}/{nbr<\d+>?2}', name: 'personne.list.by')]
