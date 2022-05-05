@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
 class Personne
@@ -14,13 +15,20 @@ class Personne
     private $id;
 
     #[ORM\Column(type: 'string', length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4, minMessage: 'Must be no less of 4 characters')]
     private $name;
 
     #[ORM\Column(type: 'string', length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4, minMessage: 'Must be no less of 4 characters')]
     private $lastname;
 
     #[ORM\Column(type: 'smallint')]
     private $age;
+
+    #[ORM\ManyToOne(targetEntity: Job::class, inversedBy: 'personnes')]
+    private $job;
 
     public function getId(): ?int
     {
@@ -59,6 +67,18 @@ class Personne
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getJob(): ?Job
+    {
+        return $this->job;
+    }
+
+    public function setJob(?Job $job): self
+    {
+        $this->job = $job;
 
         return $this;
     }

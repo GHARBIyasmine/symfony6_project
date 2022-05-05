@@ -1,0 +1,17 @@
+{% extends 'heritage.html.twig' %}
+
+{% block body %}
+    <div class="container">
+{{  form_start(form, {'attr':{'novalidate' : 'novalidate'}})  }}
+        <div class="row">
+            <div class="col">{{ form_row(form.lastname) }}</div>
+            <div class="col">{{ form_row(form.name) }}</div>
+        </div>
+        {{ form_rest(form) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+Personne Form
+{% endblock %}
+

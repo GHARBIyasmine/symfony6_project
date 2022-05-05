@@ -31,6 +31,8 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ personne.name }} {{ personne.lastname }}</h6>
                     <p class="card-text">Age : {{ personne.age }}</p>
                     <a href="{{path('personne.detail', {id : personne.id}) }}" class="card-link">Info</a>
+                    <a href="{{path('removePersonne', {id : personne.id}) }}" class="card-link">Delete</a>
+                    <a href="{{path('personne.form', {id : personne.id}) }}" class="card-link">Edit</a>
                 </div>
             </div>
         {% endfor %}

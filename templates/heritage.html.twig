@@ -9,10 +9,6 @@
     <title>{% block title %} title {% endblock %}</title>
 </head>
 <body>
-{% block body %}
-
-
-{% endblock %}
 {% for message in app.session.flashBag.get('error') %}
     <div class="alert alert-danger">
         {{ message }}
@@ -28,6 +24,11 @@
         {{ message }}
     </div>
 {% endfor %}
+{% block body %}
+
+
+{% endblock %}
+
 
 </body>
 </html>
