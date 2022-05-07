@@ -1,0 +1,27 @@
+{% extends 'heritage.html.twig' %}
+
+{% block title %}
+Stats
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="alert alert-success">Voici le nombre de Pfe par Entreprise</div>
+    <br>
+    <div class="row">
+    {%  for t in tab %}
+
+    <div class="card text-white bg-{% if loop.index is even %}primary{% else %}danger{% endif %} mb-3 " style="max-width: 18rem; margin-right: 2rem">
+        <div class="card-header">{{ t[0] }}</div>
+        <div class="card-body">
+            <h5 class="card-title">Primary card title</h5>
+            <p class="card-text">{{ t['NumberPfe'] }} Pfe(s) </p>
+        </div>
+    </div>
+    {% endfor %}
+        <br>
+    </div>
+</div>
+{% endblock %}
+

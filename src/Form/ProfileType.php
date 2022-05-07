@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Job;
+use App\Entity\Profile;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ProfileType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('name')
+            ->add('lastname')
+            ->add('age')
+            ->add('password')
+            ->add('email')
+            ->add('job', EntityType::class , [
+                'expanded'=>true,
+                'multiple'=>false,
+                'class'=>Job::class,
+                'query_builder'=>function(EntityRepository $er){
+                    return $er->createQueryBuilder('j')
+                        ->orderBy('j.JobName', 'ASC');
+                },
+                //select which attribute to show so no need to override __toString()
+                'choice_label'=>'JobName'
+            ])
+            ->add('Submit',SubmitType::class)
+
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Profile::class,
+        ]);
+    }
+}

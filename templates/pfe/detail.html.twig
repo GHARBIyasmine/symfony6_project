@@ -1,0 +1,14 @@
+{% extends 'heritage.html.twig' %}
+
+{% block title %}
+   Pfe Detail
+{% endblock %}
+
+{% block body %}
+    <div class="alert alert-success">
+         Title : {{ pfe.title }} <br>
+        Student : {{ pfe.student }} <br>
+        Entreprise : {{ pfe.entreprise.getName() }}
+    </div>
+{% endblock %}
+
